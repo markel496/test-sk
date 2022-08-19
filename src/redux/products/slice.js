@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import items from '../../assets/data.json'
 import { minValue, maxValue } from '../../utils/minMaxFuncs'
 
-const MONEY = 500
+export const MONEY = 500
 const initialProducts = items.data.filter((product) => product.category === '1')
 const initialMinPrice = minValue(
   initialProducts.map((obj) => Number(obj.price))

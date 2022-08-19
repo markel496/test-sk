@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setForMeChecked, stateProducts } from '../../redux/products/slice'
+import { MONEY } from '../../redux/products/slice'
 
 const SortForMe = () => {
   const { forMeChecked } = useSelector(stateProducts)
@@ -17,7 +18,7 @@ const SortForMe = () => {
           name="price(inc)"
         />
         <span className="radio__text">
-          <span>Доступные мне</span>
+          <span>Доступные мне ({MONEY}р.)</span>
         </span>
       </label>
     </li>
