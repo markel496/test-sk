@@ -33,6 +33,7 @@ const productsSlice = createSlice({
       state.products = state.products.filter(
         (product) => product.category === action.payload
       )
+      state.visibleApplyBtn = false
 
       state.activeCategory = action.payload
       state.minPrice = minValue(state.products.map((obj) => Number(obj.price)))
