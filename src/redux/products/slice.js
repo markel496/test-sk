@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import items from '../../assets/data.json'
 import { minValue, maxValue } from '../../utils/minMaxFuncs'
+import { checkingForApplyBtn } from '../../utils/check'
 
 export const MONEY = 500
 const initialProducts = items.data.filter((product) => product.category === '1')
@@ -19,6 +20,7 @@ const initialState = {
   minPrice: initialMinPrice,
   maxPrice: initialMaxPrice,
   forMeChecked: false,
+  visibleApplyBtn: false,
 }
 
 const productsSlice = createSlice({
@@ -120,8 +122,16 @@ const productsSlice = createSlice({
       state.radioValue = ''
       state.priceValue = state.minPrice
       state.forMeChecked = false
-      state.products = items.data.filter(
+    },
+
+    setVisibleApplyBtn(state) {
+      const initialActiveProducts = items.data.filter(
         (product) => product.category === state.activeCategory
+      )
+
+      state.visibleApplyBtn = checkingForApplyBtn(
+        initialActiveProducts,
+        state.products
       )
     },
   },
@@ -139,6 +149,7 @@ export const {
   sortForMe,
   setForMeChecked,
   resetSort,
+  setVisibleApplyBtn,
 } = productsSlice.actions
 
 export default productsSlice.reducer

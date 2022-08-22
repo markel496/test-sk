@@ -10,18 +10,26 @@ import {
   sortByPriceAndName,
   sortForMe,
   resetSort,
+  setVisibleApplyBtn,
 } from '../../redux/products/slice'
 import { setActiveBurger } from '../../redux/burger/slice'
 
 const Sort = () => {
-  const { priceValue, minPrice, maxPrice, radioValue, forMeChecked } =
-    useSelector(stateProducts)
+  const {
+    priceValue,
+    minPrice,
+    maxPrice,
+    radioValue,
+    forMeChecked,
+    visibleApplyBtn,
+  } = useSelector(stateProducts)
   const dispatch = useDispatch()
 
   const apply = () => {
     dispatch(sortForMe())
     dispatch(sortByVariablePrice())
     dispatch(sortByPriceAndName())
+    dispatch(setVisibleApplyBtn())
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     dispatch(setActiveBurger(false))
   }
@@ -49,7 +57,13 @@ const Sort = () => {
           </ul>
         </div>
         {!radioValue && priceValue === minPrice && !forMeChecked ? (
-          ''
+          visibleApplyBtn && (
+            <div className="sidebar__btns">
+              <button className="apply-btn" onClick={apply}>
+                Применить
+              </button>
+            </div>
+          )
         ) : (
           <div className="sidebar__btns">
             <button className="apply-btn" onClick={apply}>
